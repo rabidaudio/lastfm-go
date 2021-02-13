@@ -222,6 +222,134 @@ type UserGetRecentTracks struct {
 	} `xml:"track"`
 }
 
+//user.getRecentTracks (extended: 1)
+type UserGetRecentTracksExtended struct {
+	XMLName    xml.Name `xml:"recenttracks"`
+	User       string   `xml:"user,attr"`
+	Total      int      `xml:"total,attr"`
+	Page       int      `xml:"page,attr"`
+	PerPage    int      `xml:"perPage,attr"`
+	TotalPages int      `xml:"totalPages,attr"`
+	Tracks     []struct {
+		NowPlaying string `xml:"nowplaying,attr,omitempty"`
+		Artist     struct {
+			Name  string `xml:"name"`
+			Mbid  string `xml:"mbid"`
+			Url   string `xml:"url"`
+			Image []struct {
+				Size string `xml:"size,attr"`
+				Url  string `xml:",chardata"`
+			} `xml:"image"`
+		} `xml:"artist"`
+		Name       string `xml:"name"`
+		Streamable string `xml:"streamable"`
+		Mbid       string `xml:"mbid"`
+		Album      struct {
+			Name string `xml:",chardata"`
+			Mbid string `xml:"mbid,attr"`
+		} `xml:"album"`
+		Url    string `xml:"url"`
+		Images []struct {
+			Size string `xml:"size,attr"`
+			Url  string `xml:",chardata"`
+		} `xml:"image"`
+		Date struct {
+			Uts  string `xml:"uts,attr"`
+			Date string `xml:",chardata"`
+		} `xml:"date"`
+		Loved string `xml:"loved,omitempty"`
+	} `xml:"track"`
+}
+
+//user.getRecommendedArtists
+type UserGetRecommendedArtists struct {
+	XMLName    xml.Name `xml:"recommendations"`
+	User       string   `xml:"user,attr"`
+	Total      int      `xml:"total,attr"`
+	Page       int      `xml:"page,attr"`
+	PerPage    int      `xml:"perPage,attr"`
+	TotalPages int      `xml:"totalPages,attr"`
+	Artists    []struct {
+		Name       string `xml:"name"`
+		Mbid       string `xml:"mbid"`
+		Url        string `xml:"url"`
+		Streamable string `xml:"streamable"`
+		Images     []struct {
+			Size string `xml:"size,attr"`
+			Url  string `xml:",chardata"`
+		} `xml:"image"`
+	} `xml:"artist"`
+}
+
+//user.getRecommendedEvents
+type UserGetRecommendedEvents struct {
+	XMLName    xml.Name `xml:"events"`
+	User       string   `xml:"user,attr"`
+	Total      int      `xml:"total,attr"`
+	Page       int      `xml:"page,attr"`
+	PerPage    int      `xml:"perPage,attr"`
+	TotalPages int      `xml:"totalPages,attr"`
+	Events     []struct {
+		Id      string `xml:"id"`
+		Title   string `xml:"title"`
+		Artists struct {
+			Headliner string   `xml:"headliner"`
+			Artists   []string `xml:"artist"`
+		} `xml:"artists"`
+		Venue struct {
+			Name     string `xml:"name"`
+			Location struct {
+				City       string `xml:"city"`
+				Country    string `xml:"country"`
+				Street     string `xml:"street"`
+				Postalcode string `xml:"postalcode"`
+				Point      struct {
+					Lat  float64 `xml:"lat"`
+					Long float64 `xml:"long"`
+				} `xml:"point"`
+			} `xml:"location"`
+			Url         string `xml:"url"`
+			Website     string `xml:"website"`
+			PhoneNumber string `xml:"phonenumber"`
+			Images      []struct {
+				Size string `xml:"size,attr"`
+				Url  string `xml:",chardata"`
+			} `xml:"image"`
+		} `xml:"venue"`
+		StartDate   string `xml:"startDate"`
+		Description string `xml:"description"`
+		Images      []struct {
+			Size string `xml:"size,attr"`
+			Url  string `xml:",chardata"`
+		} `xml:"image"`
+		Attendance string `xml:"attendance"`
+		Reviews    string `xml:"reviews"`
+		Tag        string `xml:"tag"`
+		Url        string `xml:"url"`
+		Website    string `xml:"website"`
+		Tickets    []struct {
+			Supplier string `xml:"supplier,attr"`
+			Url      string `xml:",chardata"`
+		} `xml:"tickets>ticket"`
+		Tags []string `xml:"tags>tag"`
+	} `xml:"event"`
+}
+
+//user.getShouts
+type UserGetShouts struct {
+	XMLName    xml.Name `xml:"shouts"`
+	User       string   `xml:"user,attr"`
+	Total      int      `xml:"total,attr"`
+	Page       int      `xml:"page,attr"`
+	PerPage    int      `xml:"perPage,attr"`
+	TotalPages int      `xml:"totalPages,attr"`
+	Shouts     []struct {
+		Body   string `xml:"body"`
+		Author string `xml:"author"`
+		Date   string `xml:"date"`
+	} `xml:"shout"`
+}
+
 //user.getTopAlbums
 type UserGetTopAlbums struct {
 	XMLName    xml.Name `xml:"topalbums"`
